@@ -1,0 +1,157 @@
+*, ::after, ::before{
+    margin: 0;
+    padding: 0;
+}
+.hiddenForm{
+    display: none;
+}
+
+:root {
+    --bg-main: #3b2019; 
+    --form-bg: #2e1411; 
+    --accent-burgundy: #7a1f1f;
+    --accent-hover: #5c1616; 
+    --text-light: #f4e8e1; 
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+}
+
+#addBtn {
+    background-color: var(--accent-burgundy);
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+#addBtn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+#addBtn:active {
+    transform: translateY(0);
+}
+
+form {
+    background-color: var(--form-bg);
+    border: 2px solid var(--accent-burgundy);
+    border-radius: 12px;
+    padding: 30px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+form label {
+    font-size: 1.1rem;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    background-color: #f4e8e1;
+    color: #2b1b17;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-burgundy);
+}
+
+form p {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--accent-burgundy);
+    padding-bottom: 5px;
+}
+
+form input[type="radio"] {
+    margin-right: 8px;
+    margin-bottom: 15px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+form input[type="radio"] + label {
+    font-size: 1rem;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+form button {
+    background-color: var(--accent-burgundy);
+    color: var(--text-light);
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: var(--accent-hover);
+}
+
+.book {
+    background-color: var(--form-bg); 
+    border-left: 6px solid var(--accent-burgundy);
+    border-radius: 8px; 
+    padding: 20px; 
+    margin-top: 20px; 
+    width: 300px;
+    
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    
+    font-size: 1.05rem; 
+    line-height: 1.4;
+}
+
+.book .dltBtn {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9rem; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-start; 
+}
+
+.book .dltBtn:hover {
+    background-color: var(--accent-burgundy);
+    border-color: var(--accent-burgundy);
+}
