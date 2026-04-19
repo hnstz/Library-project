@@ -1,29 +1,32 @@
-*, ::after, ::before{
+*, ::after, ::before {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-.hiddenForm{
+
+.hiddenForm {
     display: none;
 }
 
 :root {
-    --bg-main: #3b2019; 
-    --form-bg: #2e1411; 
+    --bg-main: #5c362b;
+    --form-bg: #2e1411;
     --accent-burgundy: #7a1f1f;
-    --accent-hover: #5c1616; 
-    --text-light: #f4e8e1; 
+    --accent-hover: #5c1616;
+    --text-light: #f4e8e1;
 }
 
 body {
     background-color: var(--bg-main);
     color: var(--text-light);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 50px;
+    min-height: 100vh;
+    padding: 50px 50px 50px 42px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 #addBtn {
@@ -32,7 +35,6 @@ body {
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
-    margin-bottom: 30px;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
@@ -48,16 +50,22 @@ body {
 #addBtn:active {
     transform: translateY(0);
 }
-
+header{
+    width: 100%;
+    margin-bottom: 2rem;
+}
 form {
+    overflow-y: auto;
     background-color: var(--form-bg);
     border: 2px solid var(--accent-burgundy);
     border-radius: 12px;
     padding: 30px;
-    width: 320px;
+    width: 20rem;
+    height: 35rem;
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    float: right;
 }
 
 form label {
@@ -91,10 +99,16 @@ form p {
 }
 
 form input[type="radio"] {
-    margin-right: 8px;
-    margin-bottom: 15px;
+    margin-right: 1px;
+    margin-bottom: 5px;
     transform: scale(1.2);
     cursor: pointer;
+    display: inline-block;
+}
+
+label[for='opt1'],
+label[for='opt2']{
+    display: inline-block;
 }
 
 form input[type="radio"] + label {
@@ -112,7 +126,6 @@ form button {
     margin-top: 25px;
     font-size: 1.1rem;
     font-weight: bold;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -121,37 +134,121 @@ form button:hover {
     background-color: var(--accent-hover);
 }
 
-.book {
-    background-color: var(--form-bg); 
-    border-left: 6px solid var(--accent-burgundy);
-    border-radius: 8px; 
-    padding: 20px; 
-    margin-top: 20px; 
-    width: 300px;
-    
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
-    
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    
-    font-size: 1.05rem; 
-    line-height: 1.4;
+.switchRead {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    width: 2.4em;
+    height: 1.4em;
 }
 
+.switchRead input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 1.4em;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1em;
+    width: 1em;
+    top: 0.2em;
+    left: 0.2em;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.switchRead input:checked + .slider {
+    background-color: rgb(10, 226, 14);
+}
+
+.switchRead input:checked + .slider:before {
+    transform: translateX(1em);
+}
+
+.book {
+    position: relative;
+    background-color: var(--form-bg);
+    border-left: 6px solid var(--accent-burgundy);
+    border-radius: 8px;
+    padding: 30px 20px 80px 20px;
+    width: 15rem;
+    height: 22rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    
+}
+
+
 .book .dltBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     background-color: transparent;
     color: var(--text-light);
     border: 1px solid var(--text-light);
     border-radius: 4px;
     padding: 8px 12px;
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    align-self: flex-start; 
 }
 
 .book .dltBtn:hover {
     background-color: var(--accent-burgundy);
     border-color: var(--accent-burgundy);
+}
+
+.book > p {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.book .switchRead {
+    position: absolute;
+    bottom: 20px;
+    left: 70px;
+}
+
+.bookValue {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+    max-width: 90%;
+    height: 2.5rem;
+    overflow-y: auto;         /* Включаем прокрутку */
+
+    /* Скрытие скроллбара */
+    scrollbar-width: none;    /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+
+/* Для Chrome, Safari, Edge */
+.bookValue::-webkit-scrollbar {
+  display: none;
 }

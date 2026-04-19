@@ -11,40 +11,62 @@ function Book(author, title, pagesAmount, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function(){
+
+}
+
 function addBookToLibrary(author, title, pagesAmount, read) {
     const newBook = new Book(author, title,pagesAmount, read);
     myLibrary.push(newBook);
 }
 
-function showBook() {
-    const newDiv = document.createElement('div');
-    const lastBook = myLibrary.at(-1);
-    const uuidLastBook = lastBook.uuid;
-    newDiv.classList.add('book', `book__${uuidLastBook}`);
+function bookRender(bookId, newDiv, read) {
 
     const dltBtn = document.createElement('button');
     dltBtn.textContent = 'delete book';
-    dltBtn.classList.add('dltBtn', `${uuidLastBook}`);
-
-    newDiv.textContent =`
-        the author is ${lastBook.author},
-        the title is ${lastBook.title},
-        pages amount is ${lastBook.pagesAmount},
-        and you ${lastBook.read === 'true' ? 'read it' : "didn't read it"}
-    `;
-
-    document.body.appendChild(newDiv);
-    newDiv.appendChild(dltBtn);
+    dltBtn.classList.add('dltBtn', bookId);
 
     dltBtn.addEventListener('click', () => {
-        const dtlClass = `${dltBtn.classList[1]}`;
-        myLibrary = myLibrary.filter((it) => it.uuid !== dtlClass);
-        console.log(myLibrary);
-        document.querySelector(`.book__${dtlClass}`).remove();
-    }
-    )
+        myLibrary = myLibrary.filter((it) => it.uuid !== bookId);
+        document.querySelector(`.book__${bookId}`).remove();
+    });
+    const textNode = document.createElement('p');
+    textNode.textContent = 'read';
+
+    const label = document.createElement('label');
+    label.classList.add('switchRead')
+
+    const span = document.createElement('span');
+    span.classList.add('slider');
+
+    const input = document.createElement('input');
+    input.classList.add('toggleBtn');
+    input.setAttribute('type', 'checkbox');
+    input.checked = (read === 'true') ? true : false;
+
+    document.body.appendChild(newDiv);
+
+    newDiv.append(textNode);
+    newDiv.appendChild(label);
+    newDiv.appendChild(dltBtn);
+
+    label.appendChild(input);
+    label.appendChild(span);
 }
 
+
+function showBook() {
+    const newDiv = document.createElement('div');
+    const book = myLibrary.at(-1);
+    newDiv.classList.add('book', `book__${book.uuid}`);
+    newDiv.innerHTML = `
+        title<br><span class="bookValue">${book.title}</span><br>
+        author<br><span class="bookValue">${book.author}</span><br> 
+        pages amount<br><span class="bookValue">${book.pagesAmount}</span><br>
+    `;
+    bookRender(book.uuid, newDiv, book.read);
+    
+}
 
 const form = document.querySelector('form');
 
@@ -57,7 +79,17 @@ addBtn.addEventListener('click', () => {
 // отправка формы (при создании книги)
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const formData = new FormData(form);
-    addBookToLibrary(formData.get('author'), formData.get('title'), formData.get('pagesAmount'), formData.get('read'));
-    showBook();
+
+    if (myLibrary.some((item) => {
+        return (item.author === formData.get('author') &&
+            item.title === formData.get('title'))
+    })){
+        alert('you already have such book!');
+    } else {
+        addBookToLibrary(formData.get('author'), formData.get('title'), formData.get('pagesAmount'), formData.get('read'));
+        showBook();
+        form.reset();
+    }
 })
