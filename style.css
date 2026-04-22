@@ -84,7 +84,8 @@ form label {
     margin-bottom: 5px;
 }
 
-form input[type="text"] {
+form input[type="text"],
+form input[type="number"] {
     background-color: #f4e8e1;
     color: #2b1b17;
     border: 2px solid transparent;
