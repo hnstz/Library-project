@@ -21,13 +21,18 @@
             <input type="text" name="author">
             <label for="pagesAmount">pages amount:</label>
             <input type="text" name="pagesAmount">
-            <div class="radioContainer">
-                <p>have you read this book?</p>
-                <input type="radio" name="read" value="true">
-                <label for="opt1">yes</label><br>
+            
+            <p>have you read this book?</p>
+            <div class="radioContainer">    
+                <div class="opt1">
+                    <input type="radio" name="read" value="true">
+                    <label for="opt1">yes</label><br>
+                </div>
 
-                <input type="radio" name="read" value="false">
-                <label for="opt2">no</label><br>
+                <div class="opt2">
+                    <input type="radio" name="read" value="false">
+                    <label for="opt2">no</label><br>
+                </div>
             </div>
             <button>create</button>
         </form>

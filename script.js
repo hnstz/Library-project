@@ -23,18 +23,23 @@ function addBookToLibrary(author, title, pagesAmount, read) {
 function bookRender(bookId, newDiv, read) {
 
     const dltBtn = document.createElement('button');
-    dltBtn.textContent = 'delete book';
+    dltBtn.textContent = 'delete';
     dltBtn.classList.add('dltBtn', bookId);
 
     dltBtn.addEventListener('click', () => {
         myLibrary = myLibrary.filter((it) => it.uuid !== bookId);
         document.querySelector(`.book__${bookId}`).remove();
     });
+    const readSwitcher = document.createElement('div');
+    readSwitcher.classList.add('readSwitcher');
+
     const textNode = document.createElement('p');
     textNode.textContent = 'read';
 
     const label = document.createElement('label');
     label.classList.add('switchRead')
+    
+    
 
     const span = document.createElement('span');
     span.classList.add('slider');
@@ -44,12 +49,11 @@ function bookRender(bookId, newDiv, read) {
     input.setAttribute('type', 'checkbox');
     input.checked = (read === 'true') ? true : false;
 
-    document.body.appendChild(newDiv);
+    const main = document.querySelector('main');
 
-    newDiv.append(textNode);
-    newDiv.appendChild(label);
-    newDiv.appendChild(dltBtn);
-
+    main.appendChild(newDiv);
+    newDiv.append(readSwitcher, dltBtn, textNode, label);
+    
     label.appendChild(input);
     label.appendChild(span);
 }
